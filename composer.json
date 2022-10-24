@@ -1,0 +1,31 @@
+{
+  "name": "nerd4ever/php-tools",
+  "description": "A module with mixed tools for php",
+  "type": "library",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sileno Brito",
+      "email": "sobrito@nerd4ever.com.br",
+      "homepage": "https://nerd4ever.com.br"
+    }
+  ],
+  "require": {
+    "php": "~7.4.0",
+    "giggsey/libphonenumber-for-php": "^8.12"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "symfony/phpunit-bridge": "^5.3"
+  },
+  "autoload": {
+    "files": [
+      "vendor/autoload.php"
+    ],
+    "psr-4": {
+      "Nerd4ever\\Tools\\": "src",
+      "Nerd4ever\\Tools\\Tests\\": "tests"
+    }
+  }
+}

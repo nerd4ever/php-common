@@ -20,9 +20,6 @@
     "symfony/phpunit-bridge": "^5.3"
   },
   "autoload": {
-    "files": [
-      "vendor/autoload.php"
-    ],
     "psr-4": {
       "Nerd4ever\\Tools\\": "src",
       "Nerd4ever\\Tools\\Tests\\": "tests"

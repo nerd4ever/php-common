@@ -8,7 +8,7 @@
         <ini name="error_reporting" value="-1"/>
     </php>
     <testsuites>
-        <testsuite name="Nerd4ever Tools">
+        <testsuite name="Nerd4ever Common">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

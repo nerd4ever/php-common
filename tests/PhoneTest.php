@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Nerd4ever\Tools\Tests;
+namespace Nerd4ever\Common\Tests;
 
 
-use Nerd4ever\Tools\PhoneTools;
+use Nerd4ever\Common\Tools\PhoneTools;
 use PHPUnit\Framework\TestCase;
 
 class PhoneTest extends TestCase

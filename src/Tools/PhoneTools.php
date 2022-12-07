@@ -1,11 +1,11 @@
 <?php
 
-namespace Nerd4ever\Tools;
+namespace Nerd4ever\Common\Tools;
 
+use Exception;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-use Exception;
 
 class PhoneTools
 {

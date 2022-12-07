@@ -1,6 +1,6 @@
 <?php
 
-namespace Nerd4ever\Tools;
+namespace Nerd4ever\Common\Tools;
 
 class SystemTools
 {

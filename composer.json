@@ -1,5 +1,5 @@
 {
-  "name": "nerd4ever/php-tools",
+  "name": "nerd4ever/common",
   "description": "A module with mixed tools for php",
   "type": "library",
   "minimum-stability": "stable",
@@ -22,8 +22,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Nerd4ever\\Tools\\": "src",
-      "Nerd4ever\\Tools\\Tests\\": "tests"
+      "Nerd4ever\\Common\\": "src",
+      "Nerd4ever\\Common\\Tests\\": "tests"
     }
   }
 }

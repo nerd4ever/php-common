@@ -13,6 +13,8 @@ class JwtResponse
 {
     const TOKEN_TYPE_BEARER = 'bearer';
 
+    private ?string $id = null;
+
     private string $accessToken;
 
     private string $expiresIn;
@@ -22,6 +24,22 @@ class JwtResponse
     private string $scope;
 
     private string $refreshToken;
+
+    /**
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string|null $id
+     */
+    public function setId(?string $id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return string

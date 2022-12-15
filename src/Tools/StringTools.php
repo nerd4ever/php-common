@@ -146,14 +146,14 @@ class StringTools
         return preg_match('/^[0-9]+$/', $value);
     }
 
-    function base64UrlEncode($data): string
+    public static function base64UrlEncode($data): string
     {
         $b64 = base64_encode($data);
         $url = strtr($b64, '+/', '-_');
         return rtrim($url, '=');
     }
 
-    function base64UrlDecode($data, $strict = false)
+    public static function base64UrlDecode($data, $strict = false)
     {
         $b64 = strtr($data, '-_', '+/');
         return base64_decode($b64, $strict);

@@ -13,6 +13,7 @@ class JwtRequest
 {
     const TYPE_REFRESH_TOKEN = 'refresh_token';
     const TYPE_PASSWORD = 'password';
+    const TYPE_AUTHORIZATION_CODE = 'authorization_code';
 
     private string $grantType;
     private ?string $clientId;

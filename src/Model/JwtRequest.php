@@ -14,31 +14,31 @@ class JwtRequest
     const TYPE_REFRESH_TOKEN = 'refresh_token';
     const TYPE_PASSWORD = 'password';
     const TYPE_AUTHORIZATION_CODE = 'authorization_code';
-    const TYPE_IMPLICIT  = 'implicit';
+    const TYPE_IMPLICIT = 'implicit';
 
-    private string $grantType = self::TYPE_IMPLICIT;
+    private ?string $grantType = null;
     private ?string $clientId;
     private ?string $clientSecret;
     private string $username;
     private string $password;
     private string $refreshToken;
+    private ?string $redirectUri = null;
+    private ?string $code = null;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGrantType(): string
+    public function getGrantType(): ?string
     {
         return $this->grantType;
     }
 
     /**
-     * @param string $grantType
-     * @return JwtRequest
+     * @param string|null $grantType
      */
-    public function setGrantType(string $grantType): JwtRequest
+    public function setGrantType(?string $grantType): void
     {
         $this->grantType = $grantType;
-        return $this;
     }
 
     /**
@@ -131,4 +131,35 @@ class JwtRequest
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getRedirectUri(): ?string
+    {
+        return $this->redirectUri;
+    }
+
+    /**
+     * @param string|null $redirectUri
+     */
+    public function setRedirectUri(?string $redirectUri): void
+    {
+        $this->redirectUri = $redirectUri;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string|null $code
+     */
+    public function setCode(?string $code): void
+    {
+        $this->code = $code;
+    }
 }

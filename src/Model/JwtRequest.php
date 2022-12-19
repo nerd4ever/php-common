@@ -15,7 +15,7 @@ class JwtRequest
     const TYPE_PASSWORD = 'password';
     const TYPE_AUTHORIZATION_CODE = 'authorization_code';
 
-    private string $grantType;
+    private string $grantType = self::TYPE_AUTHORIZATION_CODE;
     private ?string $clientId;
     private ?string $clientSecret;
     private string $username;

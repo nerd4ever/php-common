@@ -14,8 +14,9 @@ class JwtRequest
     const TYPE_REFRESH_TOKEN = 'refresh_token';
     const TYPE_PASSWORD = 'password';
     const TYPE_AUTHORIZATION_CODE = 'authorization_code';
+    const TYPE_IMPLICIT  = 'implicit';
 
-    private string $grantType = self::TYPE_AUTHORIZATION_CODE;
+    private string $grantType = self::TYPE_IMPLICIT;
     private ?string $clientId;
     private ?string $clientSecret;
     private string $username;

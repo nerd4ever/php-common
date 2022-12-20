@@ -12,6 +12,7 @@ namespace Nerd4ever\Common\Model;
 class JwtResponse
 {
     const TOKEN_TYPE_BEARER = 'bearer';
+    const TOKEN_TYPE_BASIC = 'basic';
 
     private ?string $id = null;
 

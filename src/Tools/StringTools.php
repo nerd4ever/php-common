@@ -148,14 +148,11 @@ class StringTools
 
     public static function base64UrlEncode($data): string
     {
-        $b64 = base64_encode($data);
-        $url = strtr($b64, '+/', '-_');
-        return rtrim($url, '=');
+        return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($data));
     }
 
     public static function base64UrlDecode($data, $strict = false)
     {
-        $b64 = strtr($data, '-_', '+/');
-        return base64_decode($b64, $strict);
+        return base64_decode(str_replace(['-', '_'], ['+', '/'], $data), $strict);
     }
 }

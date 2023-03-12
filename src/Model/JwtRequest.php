@@ -25,6 +25,8 @@ class JwtRequest
     private string $refreshToken;
     private ?string $redirectUri = null;
     private ?string $code = null;
+    private ?string $nonce = null;
+    private ?string $state = null;
 
     /**
      * @return string|null
@@ -163,4 +165,37 @@ class JwtRequest
     {
         $this->code = $code;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getNonce(): ?string
+    {
+        return $this->nonce;
+    }
+
+    /**
+     * @param string|null $nonce
+     */
+    public function setNonce(?string $nonce): void
+    {
+        $this->nonce = $nonce;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string|null $state
+     */
+    public function setState(?string $state): void
+    {
+        $this->state = $state;
+    }
+
 }

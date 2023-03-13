@@ -19,9 +19,9 @@ class JwtRequest
     /**
      * Tipo de concessão
      *
-     * @var string
+     * @var string|null
      */
-    private string $grantType;
+    private ?string $grantType = null;
     /**
      * Tipo de resposta
      *
@@ -41,19 +41,19 @@ class JwtRequest
      */
     private ?string $clientSecret = null;
     /**
-     * @var string
+     * @var string|null
      */
-    private string $username;
+    private ?string $username = null;
     /**
      * Senha do proprietário do recurso
      *
-     * @var string
+     * @var string|null
      */
-    private string $password;
+    private ?string $password = null;
     /**
-     * @var string
+     * @var string|null
      */
-    private string $refreshToken;
+    private ?string $refreshToken = null;
     /**
      * A URI de redirecionamento usada na solicitação de autorização
      *

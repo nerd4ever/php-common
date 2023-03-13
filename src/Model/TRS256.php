@@ -4,7 +4,7 @@ namespace Nerd4ever\Common\Model;
 
 use Exception;
 
-trait RS256Trait
+trait TRS256
 {
     /**
      * Encode given data using a given key.

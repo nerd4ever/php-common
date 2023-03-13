@@ -16,16 +16,65 @@ class JwtRequest
     const TYPE_AUTHORIZATION_CODE = 'authorization_code';
     const TYPE_IMPLICIT = 'implicit';
     const TYPE_CLIENT_CREDENTIAL = 'client_credential';
-
-    private ?string $grantType = null;
-    private ?string $clientId;
-    private ?string $clientSecret;
+    /**
+     * Tipo de concessão
+     *
+     * @var string
+     */
+    private string $grantType;
+    /**
+     * Tipo de resposta
+     *
+     * @var string|null
+     */
+    private ?string $responseType = null;
+    /**
+     * ID do cliente registrado no servidor de autorização
+     *
+     * @var string|null
+     */
+    private ?string $clientId = null;
+    /**
+     * Segredo do cliente registrado no servidor de autorização
+     *
+     * @var string|null
+     */
+    private ?string $clientSecret = null;
+    /**
+     * @var string
+     */
     private string $username;
+    /**
+     * Senha do proprietário do recurso
+     *
+     * @var string
+     */
     private string $password;
+    /**
+     * @var string
+     */
     private string $refreshToken;
+    /**
+     * A URI de redirecionamento usada na solicitação de autorização
+     *
+     * @var string|null
+     */
     private ?string $redirectUri = null;
+    /**
+     * Código de autorização recebido na etapa anterior do fluxo
+     *
+     * @var string|null
+     */
     private ?string $code = null;
+    /**
+     * @var string|null
+     */
     private ?string $nonce = null;
+    /**
+     * Um valor opaco fornecido pelo cliente que deve ser incluído na resposta
+     *
+     * @var string|null
+     */
     private ?string $state = null;
 
     /**
@@ -42,6 +91,22 @@ class JwtRequest
     public function setGrantType(?string $grantType): void
     {
         $this->grantType = $grantType;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getResponseType(): ?string
+    {
+        return $this->responseType;
+    }
+
+    /**
+     * @param string|null $responseType
+     */
+    public function setResponseType(?string $responseType): void
+    {
+        $this->responseType = $responseType;
     }
 
     /**
@@ -198,4 +263,22 @@ class JwtRequest
         $this->state = $state;
     }
 
+    public function isValid(): bool
+    {
+        if (empty($this->grantType) == null) return false;
+        switch ($this->grantType) {
+            case JwtRequest::TYPE_AUTHORIZATION_CODE:
+                return !empty($this->code) && !empty($this->clientId) && !empty($this->clientSecret);
+            case JwtRequest::TYPE_IMPLICIT:
+                return !empty($this->clientId) && !empty($this->response_type);
+            case JwtRequest::TYPE_PASSWORD:
+                return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->username) && !empty($this->password);
+            case JwtRequest::TYPE_CLIENT_CREDENTIAL:
+                return !empty($this->clientId) && !empty($this->clientSecret);
+            case JwtRequest::TYPE_REFRESH_TOKEN:
+                return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->refreshToken);
+            default:
+                return false;
+        }
+    }
 }

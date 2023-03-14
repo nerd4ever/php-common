@@ -15,7 +15,7 @@ class JwtRequest
     const TYPE_PASSWORD = 'password';
     const TYPE_AUTHORIZATION_CODE = 'authorization_code';
     const TYPE_IMPLICIT = 'implicit';
-    const TYPE_CLIENT_CREDENTIAL = 'client_credential';
+    const TYPE_CLIENT_CREDENTIAL = 'client_credentials';
     /**
      * Tipo de concessão
      *

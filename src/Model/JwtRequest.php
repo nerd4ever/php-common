@@ -265,7 +265,7 @@ class JwtRequest
 
     public function isValid(): bool
     {
-        if (empty($this->grantType) == null) return false;
+        if (empty($this->grantType)) return false;
         switch ($this->grantType) {
             case JwtRequest::TYPE_AUTHORIZATION_CODE:
                 return !empty($this->code) && !empty($this->clientId) && !empty($this->clientSecret);

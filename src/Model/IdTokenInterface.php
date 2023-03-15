@@ -140,4 +140,25 @@ interface IdTokenInterface
      * @return DateTime|null
      */
     public function getNotBefore(): ?DateTime;
+
+    /**
+     * Este campo contém identificação da classe de referência do contexto de autenticação
+     *
+     * @return string|null
+     */
+    public function getAuthenticationContextClassReference(): ?string;
+
+    /**
+     * Este campo contém o método de autenticação usado para autenticar o usuário
+     *
+     * @return string|null
+     */
+    public function getAuthenticationMethodsReferences(): ?string;
+
+    /**
+     * Este campo contém a identificação do cliente que autorizado
+     *
+     * @return string|null
+     */
+    public function getAuthorizedPartyTheParty(): ?string;
 }

@@ -14,6 +14,13 @@ interface IdTokenInterface
     public function getAccessToken(): ?string;
 
     /**
+     * Esse campo contém um hash usado para validar o token at_hash
+     *
+     * @return string|null
+     */
+    public function getAccessTokenHash(): ?string;
+
+    /**
      * Esse campo identifica o emissor do "id_token", que é o provedor de identidade que emitiu o token
      *
      * @return string|null
@@ -48,6 +55,21 @@ interface IdTokenInterface
      * @return DateTime
      */
     public function getIssuedAt(): DateTime;
+
+    /**
+     * Este campo indica a  data/hora em que o usuário foi autenticado
+     *
+     * @return DateTime|null
+     */
+    public function getAuthorizedAt(): ?DateTime;
+
+    /**
+     * Este campo contém um valor gerado pelo cliente durante a solicitação de autenticação
+     *
+     * @return string|null
+     */
+    public function getNonce(): ?string;
+
 
     /**
      * Este campo contém o nome completo do usuário.
@@ -111,4 +133,11 @@ interface IdTokenInterface
      * @return array
      */
     public function getClaimRoles(): array;
+
+    /**
+     * Este campo contém o momento em que o token se tornará válido
+     *
+     * @return DateTime|null
+     */
+    public function getNotBefore(): ?DateTime;
 }

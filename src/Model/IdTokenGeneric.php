@@ -22,11 +22,19 @@ class IdTokenGeneric implements IdTokenInterface
     protected string $email = '';
     protected bool $emailVerified = false;
     protected ?array $address = null;
+    protected ?string $picture = null;
     protected ?string $phoneNumber = null;
     protected ?bool $phoneNumberVerified = null;
     protected ?DateTime $birthdate = null;
     protected ?string $gender = null;
     protected ?array $claimRoles = [];
+    protected ?string $accessTokenHash = null;
+    protected ?DateTime $authorizedAt = null;
+    protected ?string $nonce = null;
+    protected ?DateTime $notBefore = null;
+    protected ?string $authenticationContextClassReference = null;
+    protected ?string $authenticationMethodsReferences = null;
+    protected ?string $authorizedPartyTheParty = null;
 
     public function getAccessToken(): ?string
     {
@@ -102,4 +110,45 @@ class IdTokenGeneric implements IdTokenInterface
     {
         return $this->claimRoles;
     }
+
+    public function getAccessTokenHash(): ?string
+    {
+        return $this->accessTokenHash;
+    }
+
+    public function getAuthorizedAt(): ?DateTime
+    {
+        return $this->authorizedAt;
+    }
+
+    public function getNonce(): ?string
+    {
+        return $this->nonce;
+    }
+
+    public function getNotBefore(): ?DateTime
+    {
+        return $this->notBefore;
+    }
+
+    public function getAuthenticationContextClassReference(): ?string
+    {
+        return $this->authenticationContextClassReference;
+    }
+
+    public function getAuthenticationMethodsReferences(): ?string
+    {
+        return $this->authenticationMethodsReferences;
+    }
+
+    public function getAuthorizedPartyTheParty(): ?string
+    {
+        return $this->authorizedPartyTheParty;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
 }

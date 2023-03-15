@@ -161,4 +161,11 @@ interface IdTokenInterface
      * @return string|null
      */
     public function getAuthorizedPartyTheParty(): ?string;
+
+    /**
+     * Retorna a foto associada ao usuário
+     *
+     * @return string|null
+     */
+    public function getPicture(): ?string;
 }

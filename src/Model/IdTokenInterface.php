@@ -168,4 +168,19 @@ interface IdTokenInterface
      * @return string|null
      */
     public function getPicture(): ?string;
+
+    /**
+     * Retorna uma URL que representa o perfil do usuário.
+     *
+     * @return string|null
+     */
+    public function getProfile(): ?string;
+
+    /**
+     * Retorna o momento em que as informações do usuário foram atualizadas pela última
+     *
+     * @return DateTime|null
+     */
+    public function getUserUpdatedAt(): ?DateTime;
+
 }

@@ -35,6 +35,8 @@ class IdTokenGeneric implements IdTokenInterface
     protected ?string $authenticationContextClassReference = null;
     protected ?string $authenticationMethodsReferences = null;
     protected ?string $authorizedPartyTheParty = null;
+    protected ?string $profile = null;
+    protected ?DateTime $userUpdatedAt = null;
 
     public function getAccessToken(): ?string
     {
@@ -151,4 +153,13 @@ class IdTokenGeneric implements IdTokenInterface
         return $this->picture;
     }
 
+    public function getProfile(): ?string
+    {
+        return $this->profile;
+    }
+
+    public function getUserUpdatedAt(): ?DateTime
+    {
+        return $this->userUpdatedAt;
+    }
 }

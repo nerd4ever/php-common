@@ -146,9 +146,9 @@ class JwtRequest
     }
 
     /**
-     * @return string
+     * @return string | null
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -164,9 +164,9 @@ class JwtRequest
     }
 
     /**
-     * @return string
+     * @return string | null
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -265,12 +265,35 @@ class JwtRequest
 
     public function isValid(): bool
     {
-        if (empty($this->grantType)) return false;
+        $validGrantTypes = [
+            JwtRequest::TYPE_AUTHORIZATION_CODE,
+            JwtRequest::TYPE_IMPLICIT,
+            JwtRequest::TYPE_PASSWORD,
+            JwtRequest::TYPE_CLIENT_CREDENTIAL,
+            JwtRequest::TYPE_REFRESH_TOKEN,
+        ];
+
+        $validResponseTypes = [
+            'code',
+            'token',
+        ];
+
+        if (!empty($this->grantType) && !in_array($this->grantType, $validGrantTypes, true)) {
+            return false;
+        }
+
+        if (!empty($this->responseType) && !in_array($this->responseType, $validResponseTypes, true)) {
+            return false;
+        }
+
+        if (empty($this->grantType) && $this->responseType === 'token') {
+            // Implicit flow
+            return !empty($this->clientId);
+        }
+
         switch ($this->grantType) {
             case JwtRequest::TYPE_AUTHORIZATION_CODE:
                 return !empty($this->code) && !empty($this->clientId) && !empty($this->clientSecret);
-            case JwtRequest::TYPE_IMPLICIT:
-                return !empty($this->clientId) && !empty($this->response_type);
             case JwtRequest::TYPE_PASSWORD:
                 return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->username) && !empty($this->password);
             case JwtRequest::TYPE_CLIENT_CREDENTIAL:

@@ -76,6 +76,12 @@ class JwtRequest
      * @var string|null
      */
     private ?string $state = null;
+    /**
+     * Define como a resposta do provedor de autorização OAuth 2.0 deve ser entregue ao aplicativo cliente
+     *
+     * @var string|null
+     */
+    private ?string $responseMode = null;
 
     /**
      * @return string|null
@@ -263,6 +269,22 @@ class JwtRequest
         $this->state = $state;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getResponseMode(): ?string
+    {
+        return $this->responseMode;
+    }
+
+    /**
+     * @param string|null $responseMode
+     */
+    public function setResponseMode(?string $responseMode): void
+    {
+        $this->responseMode = $responseMode;
+    }
+
     public function isValid(): bool
     {
         $validGrantTypes = [
@@ -278,6 +300,12 @@ class JwtRequest
             'token',
         ];
 
+        $validResponseModes = [
+            'query',
+            'fragment',
+            'form_post',
+            'jwt',
+        ];
         if (!empty($this->grantType) && !in_array($this->grantType, $validGrantTypes, true)) {
             return false;
         }
@@ -285,7 +313,9 @@ class JwtRequest
         if (!empty($this->responseType) && !in_array($this->responseType, $validResponseTypes, true)) {
             return false;
         }
-
+        if (!empty($this->responseMode) && !in_array($this->responseMode, $validResponseModes, true)) {
+            return false;
+        }
         if (empty($this->grantType) && $this->responseType === 'token') {
             // Implicit flow
             return !empty($this->clientId);

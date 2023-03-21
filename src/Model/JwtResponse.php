@@ -26,10 +26,6 @@ class JwtResponse
 
     private string $refreshToken;
 
-    private string $nonce;
-
-    private string $state;
-
     /**
      * @return string|null
      */
@@ -134,22 +130,6 @@ class JwtResponse
     {
         $this->refreshToken = $refreshToken;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNonce(): string
-    {
-        return $this->nonce;
-    }
-
-    /**
-     * @param string $nonce
-     */
-    public function setNonce(string $nonce): void
-    {
-        $this->nonce = $nonce;
     }
 
 }

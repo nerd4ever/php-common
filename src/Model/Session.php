@@ -280,7 +280,7 @@ class Session
         return $this->requestId;
     }
 
-    public static function factory(SessionMetadataInterface $metadata): static
+    public static function factory(SessionMetadataInterface $metadata, float $timeout = 5.0): static
     {
         $s = new Session();
         $s->platform = $s->findPlatform($metadata->getUserAgent());
@@ -299,7 +299,7 @@ class Session
                 $s->device = SessionMetadataInterface::DeviceDesktop;
                 break;
         }
-        $s->getLocalization($metadata->getIpAddress());
+        $s->getLocalization($metadata->getIpAddress(), $timeout);
         $s->type = $metadata->getAuthorizationType();
         $s->flow = $metadata->getOAuth2Flow();
         $s->applicationId = $metadata->getApplicationId();
@@ -340,9 +340,11 @@ class Session
         return SessionMetadataInterface::PlatformUnknown;
     }
 
-    protected function getLocalization(string $ipAddress): void
+    protected function getLocalization(string $ipAddress, float $timeout): void
     {
-        $client = new Client();
+        $client = new Client([
+            'timeout' => $timeout, // tempo limite de 5 segundos
+        ]);
         // Fazer uma solicitação GET à API do IPStack
         $secret = getenv('IP_STACK_SECRET');
         $response = $client->get('http://api.ipstack.com/' . $ipAddress . '?access_key=' . $secret);

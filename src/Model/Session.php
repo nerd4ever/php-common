@@ -116,6 +116,13 @@ class Session
      */
     protected ?DateTime $expireAt = null;
 
+    /**
+     * Id de requisição de autorização: Isso pode ser útil para rastrear e correlacionar as requisições com as sessões
+     * e as atividades dos usuários e revogar
+     *
+     * @var string
+     */
+    protected string $requestId;
 
     private function __construct()
     {
@@ -265,6 +272,14 @@ class Session
         return $this->expireAt;
     }
 
+    /**
+     * @return string
+     */
+    public function getRequestId(): string
+    {
+        return $this->requestId;
+    }
+
     public static function factory(SessionMetadataInterface $metadata): static
     {
         $s = new Session();
@@ -293,6 +308,7 @@ class Session
         $s->updatedAt = $metadata->getUpdatedAt();
         $s->expireType = $metadata->getExpireType();
         $s->expireAt = $metadata->getExpireAt();
+        $s->requestId = $metadata->getRequestId();
         return $s;
     }
 
@@ -302,7 +318,7 @@ class Session
      * @param string $userAgent A string do User-Agent
      * @return string A plataforma correspondente
      */
-    private function findPlatform(string $userAgent): string
+    protected function findPlatform(string $userAgent): string
     {
         $platforms = [
             'Android' => SessionMetadataInterface::PlatformAndroid,
@@ -324,7 +340,7 @@ class Session
         return SessionMetadataInterface::PlatformUnknown;
     }
 
-    private function getLocalization(string $ipAddress): void
+    protected function getLocalization(string $ipAddress): void
     {
         $client = new Client();
         // Fazer uma solicitação GET à API do IPStack

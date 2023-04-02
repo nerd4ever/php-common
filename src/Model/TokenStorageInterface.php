@@ -8,7 +8,7 @@ interface TokenStorageInterface
      * Retorna um identificador único do Token
      *
      */
-    public function getId();
+    public function getTokenTId(): string;
 
     /**
      * Retorna o tipo do Token

@@ -82,6 +82,19 @@ class JwtRequest
      * @var string|null
      */
     private ?string $responseMode = null;
+    /**
+     * Valor da prova de código gerada pelo cliente para proteção contra ataques de interceptação de código em fluxos
+     * de autorização baseados em código (PKCE).
+     *
+     * @var string|null
+     */
+    private ?string $codeChallenge = null;
+    /**
+     * Método usado para gerar a prova de código, como 'S256' ou 'plain'.
+     *
+     * @var string|null
+     */
+    private ?string $codeChallengeMethod = null;
 
     /**
      * @return string|null
@@ -285,6 +298,11 @@ class JwtRequest
         $this->responseMode = $responseMode;
     }
 
+    /**
+     * Valida se o objeto possui dados validos segundo padrão oauth2 e openid connect
+     *
+     * @return bool
+     */
     public function isValid(): bool
     {
         $validGrantTypes = [
@@ -298,6 +316,11 @@ class JwtRequest
         $validResponseTypes = [
             'code',
             'token',
+            'id_token',
+            'code id_token',
+            'code token',
+            'code id_token token',
+            'id_token token',
         ];
 
         $validResponseModes = [
@@ -305,6 +328,7 @@ class JwtRequest
             'fragment',
             'form_post',
             'jwt',
+            'cookie',
         ];
         if (!empty($this->grantType) && !in_array($this->grantType, $validGrantTypes, true)) {
             return false;
@@ -315,10 +339,6 @@ class JwtRequest
         }
         if (!empty($this->responseMode) && !in_array($this->responseMode, $validResponseModes, true)) {
             return false;
-        }
-        if (empty($this->grantType) && $this->responseType === 'token') {
-            // Implicit flow
-            return !empty($this->clientId);
         }
 
         switch ($this->grantType) {
@@ -331,6 +351,10 @@ class JwtRequest
             case JwtRequest::TYPE_REFRESH_TOKEN:
                 return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->refreshToken);
             default:
+                if (!empty($this->grantType)) return false;
+                $t = empty($this->responseType) ? [] : explode(' ', $this->responseType);
+                if (in_array('token', $t) && !empty($this->clientId)) return true;
+                if (in_array('code', $t) && !empty($this->clientId)) return true;
                 return false;
         }
     }

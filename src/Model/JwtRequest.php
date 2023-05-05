@@ -299,6 +299,38 @@ class JwtRequest
     }
 
     /**
+     * @return string|null
+     */
+    public function getCodeChallenge(): ?string
+    {
+        return $this->codeChallenge;
+    }
+
+    /**
+     * @param string|null $codeChallenge
+     */
+    public function setCodeChallenge(?string $codeChallenge): void
+    {
+        $this->codeChallenge = $codeChallenge;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCodeChallengeMethod(): ?string
+    {
+        return $this->codeChallengeMethod;
+    }
+
+    /**
+     * @param string|null $codeChallengeMethod
+     */
+    public function setCodeChallengeMethod(?string $codeChallengeMethod): void
+    {
+        $this->codeChallengeMethod = $codeChallengeMethod;
+    }
+
+    /**
      * Valida se o objeto possui dados validos segundo padrão oauth2 e openid connect
      *
      * @return bool

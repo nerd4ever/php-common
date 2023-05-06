@@ -416,7 +416,9 @@ class JwtRequest
 
         switch ($this->grantType) {
             case JwtRequest::TYPE_AUTHORIZATION_CODE:
-                return !empty($this->code) && !empty($this->clientId) && !empty($this->clientSecret);
+                return
+                    (!empty($this->code) && !empty($this->clientId) && !empty($this->clientSecret)) ||
+                    (!empty($this->code) && !empty($this->codeVerifier));
             case JwtRequest::TYPE_PASSWORD:
                 return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->username) && !empty($this->password);
             case JwtRequest::TYPE_CLIENT_CREDENTIAL:

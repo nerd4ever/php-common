@@ -83,18 +83,23 @@ class JwtRequest
      */
     private ?string $responseMode = null;
     /**
-     * Valor da prova de código gerada pelo cliente para proteção contra ataques de interceptação de código em fluxos
-     * de autorização baseados em código (PKCE).
+     * Hash do código de verificação usado pelo PKCE (PKCE).
      *
      * @var string|null
      */
     private ?string $codeChallenge = null;
     /**
-     * Método usado para gerar a prova de código, como 'S256' ou 'plain'.
+     * Método usado para gerar o hash do código de verificação co PKCE geralmente 'S256' ou 'plain'.
      *
      * @var string|null
      */
     private ?string $codeChallengeMethod = null;
+    /**
+     * Código de verificação usando pelo PKCE
+     *
+     * @var string|null
+     */
+    private ?string $codeVerifier = null;
 
     /**
      * @return string|null
@@ -106,10 +111,12 @@ class JwtRequest
 
     /**
      * @param string|null $grantType
+     * @return JwtRequest
      */
-    public function setGrantType(?string $grantType): void
+    public function setGrantType(?string $grantType): JwtRequest
     {
         $this->grantType = $grantType;
+        return $this;
     }
 
     /**
@@ -122,10 +129,12 @@ class JwtRequest
 
     /**
      * @param string|null $responseType
+     * @return JwtRequest
      */
-    public function setResponseType(?string $responseType): void
+    public function setResponseType(?string $responseType): JwtRequest
     {
         $this->responseType = $responseType;
+        return $this;
     }
 
     /**
@@ -165,7 +174,7 @@ class JwtRequest
     }
 
     /**
-     * @return string | null
+     * @return string|null
      */
     public function getUsername(): ?string
     {
@@ -173,17 +182,17 @@ class JwtRequest
     }
 
     /**
-     * @param string $username
+     * @param string|null $username
      * @return JwtRequest
      */
-    public function setUsername(string $username): JwtRequest
+    public function setUsername(?string $username): JwtRequest
     {
         $this->username = $username;
         return $this;
     }
 
     /**
-     * @return string | null
+     * @return string|null
      */
     public function getPassword(): ?string
     {
@@ -191,28 +200,28 @@ class JwtRequest
     }
 
     /**
-     * @param string $password
+     * @param string|null $password
      * @return JwtRequest
      */
-    public function setPassword(string $password): JwtRequest
+    public function setPassword(?string $password): JwtRequest
     {
         $this->password = $password;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRefreshToken(): string
+    public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }
 
     /**
-     * @param string $refreshToken
+     * @param string|null $refreshToken
      * @return JwtRequest
      */
-    public function setRefreshToken(string $refreshToken): JwtRequest
+    public function setRefreshToken(?string $refreshToken): JwtRequest
     {
         $this->refreshToken = $refreshToken;
         return $this;
@@ -228,10 +237,12 @@ class JwtRequest
 
     /**
      * @param string|null $redirectUri
+     * @return JwtRequest
      */
-    public function setRedirectUri(?string $redirectUri): void
+    public function setRedirectUri(?string $redirectUri): JwtRequest
     {
         $this->redirectUri = $redirectUri;
+        return $this;
     }
 
     /**
@@ -244,10 +255,12 @@ class JwtRequest
 
     /**
      * @param string|null $code
+     * @return JwtRequest
      */
-    public function setCode(?string $code): void
+    public function setCode(?string $code): JwtRequest
     {
         $this->code = $code;
+        return $this;
     }
 
     /**
@@ -260,10 +273,12 @@ class JwtRequest
 
     /**
      * @param string|null $nonce
+     * @return JwtRequest
      */
-    public function setNonce(?string $nonce): void
+    public function setNonce(?string $nonce): JwtRequest
     {
         $this->nonce = $nonce;
+        return $this;
     }
 
     /**
@@ -276,10 +291,12 @@ class JwtRequest
 
     /**
      * @param string|null $state
+     * @return JwtRequest
      */
-    public function setState(?string $state): void
+    public function setState(?string $state): JwtRequest
     {
         $this->state = $state;
+        return $this;
     }
 
     /**
@@ -292,10 +309,12 @@ class JwtRequest
 
     /**
      * @param string|null $responseMode
+     * @return JwtRequest
      */
-    public function setResponseMode(?string $responseMode): void
+    public function setResponseMode(?string $responseMode): JwtRequest
     {
         $this->responseMode = $responseMode;
+        return $this;
     }
 
     /**
@@ -308,10 +327,12 @@ class JwtRequest
 
     /**
      * @param string|null $codeChallenge
+     * @return JwtRequest
      */
-    public function setCodeChallenge(?string $codeChallenge): void
+    public function setCodeChallenge(?string $codeChallenge): JwtRequest
     {
         $this->codeChallenge = $codeChallenge;
+        return $this;
     }
 
     /**
@@ -324,10 +345,30 @@ class JwtRequest
 
     /**
      * @param string|null $codeChallengeMethod
+     * @return JwtRequest
      */
-    public function setCodeChallengeMethod(?string $codeChallengeMethod): void
+    public function setCodeChallengeMethod(?string $codeChallengeMethod): JwtRequest
     {
         $this->codeChallengeMethod = $codeChallengeMethod;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCodeVerifier(): ?string
+    {
+        return $this->codeVerifier;
+    }
+
+    /**
+     * @param string|null $codeVerifier
+     * @return JwtRequest
+     */
+    public function setCodeVerifier(?string $codeVerifier): JwtRequest
+    {
+        $this->codeVerifier = $codeVerifier;
+        return $this;
     }
 
     /**

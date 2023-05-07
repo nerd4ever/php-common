@@ -77,6 +77,12 @@ class JwtRequest
      */
     private ?string $state = null;
     /**
+     * Escopos (permissões) de acesso solicitadas
+     *
+     * @var string|null
+     */
+    private ?string $scope = null;
+    /**
      * Define como a resposta do provedor de autorização OAuth 2.0 deve ser entregue ao aplicativo cliente
      *
      * @var string|null
@@ -314,6 +320,24 @@ class JwtRequest
     public function setResponseMode(?string $responseMode): JwtRequest
     {
         $this->responseMode = $responseMode;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getScope(): ?string
+    {
+        return $this->scope;
+    }
+
+    /**
+     * @param string|null $scope
+     * @return JwtRequest
+     */
+    public function setScope(?string $scope): JwtRequest
+    {
+        $this->scope = $scope;
         return $this;
     }
 

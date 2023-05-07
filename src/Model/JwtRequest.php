@@ -414,10 +414,10 @@ class JwtRequest
             'code',
             'token',
             'id_token',
-            'code id_token',
             'code token',
-            'code id_token token',
+            'code id_token',
             'id_token token',
+            'code id_token token',
         ];
 
         $validResponseModes = [
@@ -431,8 +431,17 @@ class JwtRequest
             return false;
         }
 
-        if (!empty($this->responseType) && !in_array($this->responseType, $validResponseTypes, true)) {
-            return false;
+        if (!empty($this->responseType)) {
+            $responseTypeValid = false;
+            foreach ($validResponseTypes as $validResponseType) {
+                if ($this->compareResponseType($this->responseType, $validResponseType)) {
+                    $responseTypeValid = true;
+                    break;
+                }
+            }
+            if (!$responseTypeValid) {
+                return false;
+            }
         }
         if (!empty($this->responseMode) && !in_array($this->responseMode, $validResponseModes, true)) {
             return false;
@@ -456,5 +465,16 @@ class JwtRequest
                 if (in_array('code', $t) && !empty($this->clientId)) return true;
                 return false;
         }
+    }
+
+    private function compareResponseType($str1, $str2): bool
+    {
+        $arr1 = explode(' ', $str1);
+        $arr2 = explode(' ', $str2);
+
+        sort($arr1);
+        sort($arr2);
+
+        return $arr1 == $arr2;
     }
 }

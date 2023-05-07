@@ -452,7 +452,7 @@ class JwtRequest
             default:
                 if (!empty($this->grantType)) return false;
                 $t = empty($this->responseType) ? [] : explode(' ', $this->responseType);
-                if (in_array('token', $t) && !empty($this->clientId)) return true;
+                if ((empty($t) || in_array('token', $t)) && !empty($this->clientId)) return true;
                 if (in_array('code', $t) && !empty($this->clientId)) return true;
                 return false;
         }

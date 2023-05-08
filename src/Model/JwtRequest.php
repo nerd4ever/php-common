@@ -457,7 +457,8 @@ class JwtRequest
             case JwtRequest::TYPE_CLIENT_CREDENTIAL:
                 return !empty($this->clientId) && !empty($this->clientSecret);
             case JwtRequest::TYPE_REFRESH_TOKEN:
-                return !empty($this->clientId) && !empty($this->clientSecret) && !empty($this->refreshToken);
+                // Refresh Token pode ser nulo, se o scope aceito anteriormente contemplar offline_access
+                return !empty($this->clientId) && !empty($this->refreshToken);
             default:
                 if (!empty($this->grantType)) return false;
                 $t = empty($this->responseType) ? [] : explode(' ', $this->responseType);

@@ -26,6 +26,8 @@ class JwtResponse
 
     private string $refreshToken;
 
+    private ?string $state = null;
+
     /**
      * @return string|null
      */
@@ -129,6 +131,24 @@ class JwtResponse
     public function setRefreshToken(string $refreshToken): JwtResponse
     {
         $this->refreshToken = $refreshToken;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string|null $state
+     * @return JwtResponse
+     */
+    public function setState(?string $state): JwtResponse
+    {
+        $this->state = $state;
         return $this;
     }
 

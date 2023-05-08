@@ -27,6 +27,7 @@ class JwtResponse
     private string $refreshToken;
 
     private ?string $state = null;
+    private ?string $sessionState = null;
 
     /**
      * @return string|null
@@ -38,10 +39,12 @@ class JwtResponse
 
     /**
      * @param string|null $id
+     * @return JwtResponse
      */
-    public function setId(?string $id): void
+    public function setId(?string $id): JwtResponse
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -149,6 +152,24 @@ class JwtResponse
     public function setState(?string $state): JwtResponse
     {
         $this->state = $state;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSessionState(): ?string
+    {
+        return $this->sessionState;
+    }
+
+    /**
+     * @param string|null $sessionState
+     * @return JwtResponse
+     */
+    public function setSessionState(?string $sessionState): JwtResponse
+    {
+        $this->sessionState = $sessionState;
         return $this;
     }
 

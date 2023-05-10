@@ -66,7 +66,7 @@ interface SessionMetadataInterface
      *
      * @return string O ID da aplicação autorizada.
      */
-    public function getApplicationId(): string;
+    public function getClientId(): string;
 
     /**
      * Obtém o ID da requisição de autorização.

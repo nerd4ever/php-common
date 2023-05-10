@@ -30,7 +30,7 @@ class Session
      *
      * @var string
      */
-    protected string $applicationId;
+    protected string $clientId;
 
     /**
      * Usuário: Essa coluna é importante para rastrear quem está fazendo login na aplicação. É útil saber se a
@@ -147,9 +147,9 @@ class Session
     /**
      * @return string
      */
-    public function getApplicationId(): string
+    public function getClientId(): string
     {
-        return $this->applicationId;
+        return $this->clientId;
     }
 
     /**
@@ -302,7 +302,7 @@ class Session
         $s->getLocalization($metadata->getIpAddress(), $timeout);
         $s->type = $metadata->getAuthorizationType();
         $s->flow = $metadata->getOAuth2Flow();
-        $s->applicationId = $metadata->getApplicationId();
+        $s->clientId = $metadata->getClientId();
         $s->userId = $metadata->getUserId();
         $s->authorizedAt = $metadata->getAuthorizedAt();
         $s->updatedAt = $metadata->getUpdatedAt();

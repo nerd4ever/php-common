@@ -13,13 +13,10 @@ class IdTools
 
         // Obter o UUID formatado
         return $uuid->toString();
-
-
     }
 
-    public static function gen32(): string
+    public static function genIdentifier(): string
     {
-        return substr(IdTools::gen(), 0, 32);
+        return str_replace('-', '', IdTools::gen());
     }
-
 }

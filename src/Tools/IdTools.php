@@ -8,15 +8,10 @@ class IdTools
 {
     public static function gen(): string
     {
-        // Gerar um UUIDv4
-        $uuid = Uuid::uuid4();
+        // Gerar um UUIDv6
+        $uuid = Uuid::uuid6();
 
         // Obter o UUID formatado
         return $uuid->toString();
-    }
-
-    public static function genIdentifier(): string
-    {
-        return str_replace('-', '', IdTools::gen());
     }
 }

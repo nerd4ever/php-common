@@ -17,6 +17,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.0 || ^7.0",
     "giggsey/libphonenumber-for-php": "^8.12",
+    "jms/serializer-bundle": "^4.0",
     "ramsey/uuid": "^4.7"
   },
   "require-dev": {

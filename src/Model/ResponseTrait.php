@@ -41,7 +41,7 @@ trait ResponseTrait
 
     private function view($data = null, $statusCode = null, array $headers = []): View
     {
-        $view = new View($statusCode, $data, $headers);
+        $view = new View($data, $statusCode, $headers);
         $view->setGroups(array('Default'));
         return $view;
     }
@@ -102,7 +102,7 @@ trait ResponseTrait
         return $response;
     }
 
-    public function viewJson(Request $request, array $data): Response
+    protected function viewJson(Request $request, array $data): Response
     {
         try {
             $view = $this->view($data, Response::HTTP_OK);

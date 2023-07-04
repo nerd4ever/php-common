@@ -46,6 +46,26 @@ trait ResponseTrait
         return $view;
     }
 
+    public function viewDataTable($request, array $entities): Response
+    {
+        try {
+            $out = new DataTableResult();
+            $out->setLength(count($entities));
+            $out->setTotal($out->getLength());
+            $out->setPage(1);
+            $out->setRows($entities);
+
+            $view = $this->view($out, Response::HTTP_OK);
+            $view->setGroups(array(
+                'DataTable',
+                'Default'
+            ));
+            return $this->handleView($view);
+        } catch (Exception $ex) {
+            return $this->viewException($request, $ex);
+        }
+    }
+
     public function getObjectFromArray(array $data, string $class, ?array $groups = null, ?string $type = null): ?object
     {
         $context = DeserializationContext::create();

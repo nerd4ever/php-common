@@ -135,7 +135,7 @@ trait ResponseTrait
         }
     }
 
-    public function viewShow(Request $request, $entity): Response
+    public function viewShow(Request $request, $entity, array $groups = []): Response
     {
         try {
             if ($entity === null) {
@@ -149,7 +149,7 @@ trait ResponseTrait
                 throw  new Exception("Not is a object", Response::HTTP_NOT_ACCEPTABLE);
             }
             $view = $this->view($entity, Response::HTTP_OK);
-            $view->setGroups(['Show', 'Default']);
+            $view->setGroups(array_merge(['Show', 'Default'], $groups));
             return $this->handleView($view);
         } catch (Exception $ex) {
             return $this->viewException($request, $ex);

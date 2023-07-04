@@ -102,6 +102,17 @@ trait ResponseTrait
         return $response;
     }
 
+    public function viewJson(Request $request, array $data): Response
+    {
+        try {
+            $view = $this->view($data, Response::HTTP_OK);
+            $view->setGroups(['Show', 'Default']);
+            return $this->handleView($view);
+        } catch (Exception $ex) {
+            return $this->viewException($request, $ex);
+        }
+    }
+
     protected function viewDownload(Request $request, $filename): Response
     {
         $response = new BinaryFileResponse($filename);

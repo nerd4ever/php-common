@@ -10,9 +10,9 @@ trait TStandard
 {
     protected ?bool $standard = null;
 
-    public function getStandard(): ?bool
+    public function isStandard(): bool
     {
-        return $this->standard;
+        return $this->standard ?? false;
     }
 
     public function setStandard(?bool $standard): object

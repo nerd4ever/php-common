@@ -15,9 +15,10 @@ class DataTableResult
         return $this->currentPage;
     }
 
-    public function setCurrentPage(int $currentPage): void
+    public function setCurrentPage(int $currentPage): DataTableResult
     {
         $this->currentPage = $currentPage;
+        return $this;
     }
 
     public function getPageSize(): int
@@ -25,9 +26,10 @@ class DataTableResult
         return $this->pageSize;
     }
 
-    public function setPageSize(int $pageSize): void
+    public function setPageSize(int $pageSize): DataTableResult
     {
         $this->pageSize = $pageSize;
+        return $this;
     }
 
     public function getTotalPages(): int
@@ -35,9 +37,10 @@ class DataTableResult
         return $this->totalPages;
     }
 
-    public function setTotalPages(int $totalPages): void
+    public function setTotalPages(int $totalPages): DataTableResult
     {
         $this->totalPages = $totalPages;
+        return $this;
     }
 
     public function getTotalRecords(): int
@@ -45,9 +48,10 @@ class DataTableResult
         return $this->totalRecords;
     }
 
-    public function setTotalRecords(int $totalRecords): void
+    public function setTotalRecords(int $totalRecords): DataTableResult
     {
         $this->totalRecords = $totalRecords;
+        return $this;
     }
 
     public function getData(): array
@@ -55,8 +59,10 @@ class DataTableResult
         return $this->data;
     }
 
-    public function setData(array $data): void
+    public function setData(array $data): DataTableResult
     {
         $this->data = $data;
+        return $this;
     }
+
 }

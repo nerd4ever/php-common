@@ -4,105 +4,59 @@ namespace Nerd4ever\Common\Model;
 
 class DataTableResult
 {
+    private int $currentPage = 0;
+    private int $pageSize = 0;
+    private int $totalPages = 0;
+    private int $totalRecords = 0;
+    private array $data = [];
 
-    private int $echo = 1;
-
-    private int $page = 0;
-
-    private int $total = 0;
-
-    private int $length = 0;
-
-    private array $rows = [];
-
-    /**
-     * @return int
-     */
-    public function getEcho(): int
+    public function getCurrentPage(): int
     {
-        return $this->echo;
+        return $this->currentPage;
     }
 
-    /**
-     * @param int $echo
-     * @return DataTableResult
-     */
-    public function setEcho(int $echo): DataTableResult
+    public function setCurrentPage(int $currentPage): void
     {
-        $this->echo = $echo;
-        return $this;
+        $this->currentPage = $currentPage;
     }
 
-    /**
-     * @return int
-     */
-    public function getPage(): int
+    public function getPageSize(): int
     {
-        return $this->page;
+        return $this->pageSize;
     }
 
-    /**
-     * @param int $page
-     * @return DataTableResult
-     */
-    public function setPage(int $page): DataTableResult
+    public function setPageSize(int $pageSize): void
     {
-        $this->page = $page;
-        return $this;
+        $this->pageSize = $pageSize;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotal(): int
+    public function getTotalPages(): int
     {
-        return $this->total;
+        return $this->totalPages;
     }
 
-    /**
-     * @param int $total
-     * @return DataTableResult
-     */
-    public function setTotal(int $total): DataTableResult
+    public function setTotalPages(int $totalPages): void
     {
-        $this->total = $total;
-        return $this;
+        $this->totalPages = $totalPages;
     }
 
-    /**
-     * @return int
-     */
-    public function getLength(): int
+    public function getTotalRecords(): int
     {
-        return $this->length;
+        return $this->totalRecords;
     }
 
-    /**
-     * @param int $length
-     * @return DataTableResult
-     */
-    public function setLength(int $length): DataTableResult
+    public function setTotalRecords(int $totalRecords): void
     {
-        $this->length = $length;
-        return $this;
+        $this->totalRecords = $totalRecords;
     }
 
-    /**
-     * @return array
-     */
-    public function getRows(): array
+    public function getData(): array
     {
-        return $this->rows;
+        return $this->data;
     }
 
-    /**
-     * @param array $rows
-     * @return DataTableResult
-     */
-    public function setRows(array $rows): DataTableResult
+    public function setData(array $data): void
     {
-        $this->rows = $rows;
-        return $this;
+        $this->data = $data;
     }
-
 }

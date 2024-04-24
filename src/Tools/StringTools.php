@@ -3,6 +3,7 @@
 
 namespace Nerd4ever\Common\Tools;
 
+use Exception;
 
 class StringTools
 {
@@ -154,5 +155,38 @@ class StringTools
     public static function base64UrlDecode($data, $strict = false)
     {
         return base64_decode(str_replace(['-', '_'], ['+', '/'], $data), $strict);
+    }
+
+    public static function generateAlphaId(?int $entropy = null): string
+    {
+        $value = ($entropy == null ? '' : $entropy) . intval(microtime(true) * 1000) . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        return base_convert($value, 10, 32);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function generateRandomPassword($length = 10): string
+    {
+        $dictionary = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $secret = '';
+
+        $dictionaryLength = strlen($dictionary);
+        for ($i = 0; $i < $length; $i++) {
+            $index = random_int(0, $dictionaryLength - 1);
+            $secret .= $dictionary[$index];
+        }
+        return $secret;
+    }
+
+    public static function stripSpecialChar(string $in): string
+    {
+        $dictionary = [".", ",", ";", "!", "@", "#", "%", "¨", "*", "(", ")", "+", "-", "=", "§", "$", "|", "\\", ":", "/", "<", ">", "?", "{", "}", "[", "]", "&", "'", '"', "´", "`", "?", '“', '”', '$', "'", "'"];
+        return str_replace($dictionary, '', trim($in));
+    }
+
+    public static function normalize(string $in): string
+    {
+        return self::stripSpecialChar(self::stripAccents($in));
     }
 }

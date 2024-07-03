@@ -1,9 +1,15 @@
-Change Log: `nerd4ever/php-tools`
+Change Log: `nerd4ever/common`
 ====================================
-## version 1.1.1
-**Date:** 10-Nov-2022
+Todas as alterações significativas neste projeto serão documentadas neste arquivo.
+
+## [2.22.0] - 2024-05-02
+
+- Adicionado interfaces para adapter
+
+## [1.1.1 ] - 2022-11-10
+
 - Atualizado versão do php
 
-## version 1.1.0
-**Date:** 10-Nov-2022
+## [1.1.0] - 2024-11-10
+
 - Adicionado serviços de geração de Id

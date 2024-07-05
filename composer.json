@@ -19,7 +19,8 @@
     "giggsey/libphonenumber-for-php": "^8.12",
     "jms/serializer-bundle": ">=4.0",
     "ramsey/uuid": "^4.7",
-    "doctrine/collections": "*"
+    "doctrine/collections": "*",
+    "doctrine/orm": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",

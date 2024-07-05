@@ -25,9 +25,6 @@ abstract class AdapterDefault implements
 
     abstract function getManager(): EntityManagerInterface;
 
-    abstract function nameFinderColumn(): ?string;
-
-    abstract function nameFinderValue(object $object): ?string;
 
     abstract function copy(object $entity, ?object $r = null): object;
 
@@ -106,4 +103,15 @@ abstract class AdapterDefault implements
     {
         return basename(str_replace('\\', '/', $this->getClass()));
     }
+
+    protected function nameFinderColumn(): ?string
+    {
+        return null;
+    }
+
+    protected function nameFinderValue(object $object): ?string
+    {
+        return null;
+    }
+
 }

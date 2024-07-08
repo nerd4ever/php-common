@@ -83,7 +83,7 @@ abstract class AdapterDefault implements
 
     public function list(?Filter $filter = null): array
     {
-        return $this->$this->getManager()->getRepository($this->getClass())->findAll();
+        return $this->getManager()->getRepository($this->getClass())->findAll();
     }
 
     protected function findByName(string $name): ?object

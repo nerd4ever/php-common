@@ -82,7 +82,7 @@ abstract class DefaultController extends Controller
             if (!$adapter instanceof AdapterCreateInterface) {
                 throw new Exception('Adapter must implement AdapterCreateInterface', Response::HTTP_NOT_ACCEPTABLE);
             }
-            $entity = $this->getObject($request, $this->getClass(), false, null);
+            $entity = $this->getObject($request, $this->getClass());
             if (!$this->isInstance($entity)) {
                 throw new Exception(sprintf('Expected an instance of %s', $this->getClassname()), Response::HTTP_NOT_ACCEPTABLE);
             }

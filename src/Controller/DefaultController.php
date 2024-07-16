@@ -11,11 +11,14 @@ use Nerd4ever\Common\Adapter\AdapterCreateInterface;
 use Nerd4ever\Common\Adapter\AdapterDeleteInterface;
 use Nerd4ever\Common\Adapter\AdapterEnableInterface;
 use Nerd4ever\Common\Adapter\AdapterListInterface;
+use Nerd4ever\Common\Adapter\AdapterNameFinderInterface;
 use Nerd4ever\Common\Adapter\AdapterReadInterface;
 use Nerd4ever\Common\Adapter\AdapterUpdateInterface;
 use Nerd4ever\Common\Model\GridAdapter;
+use Nerd4ever\Common\Model\NameFinder;
 use Nerd4ever\Common\Model\ResponseTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Exception;
@@ -154,6 +157,23 @@ abstract class DefaultController extends Controller
             }
             $adapter->enable($id, $request->get('enable'));
             return $this->viewAccept();
+        } catch (Exception $ex) {
+            return $this->viewException($request, $ex);
+        }
+    }
+
+    public function nameValidationAction(Request $request): Response
+    {
+        try {
+            $adapter = $this->getAdapter();
+            if (!$adapter instanceof AdapterNameFinderInterface) {
+                throw new Exception('Adapter must implement AdapterNameFinderInterface', Response::HTTP_NOT_ACCEPTABLE);
+            }
+            $entity = $this->getObject($request, NameFinder::class);
+            if (!$entity instanceof NameFinder) {
+                throw new Exception('Failed to get the object name finder.', Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            return new JsonResponse(['exists' => $adapter->nameFinder($entity)]);
         } catch (Exception $ex) {
             return $this->viewException($request, $ex);
         }

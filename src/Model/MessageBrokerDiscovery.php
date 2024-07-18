@@ -6,19 +6,19 @@
 
 namespace Nerd4ever\Common\Model;
 
-class MessageBrokerQueue
+class MessageBrokerDiscovery
 {
-    private string $identifier;
+    private array $routingKeys = [];
     private ?string $description;
 
-    public function getIdentifier(): string
+    public function getRoutingKeys(): array
     {
-        return $this->identifier;
+        return $this->routingKeys;
     }
 
-    public function setIdentifier(string $identifier): MessageBrokerQueue
+    public function setRoutingKeys(array $routingKeys): MessageBrokerDiscovery
     {
-        $this->identifier = $identifier;
+        $this->routingKeys = $routingKeys;
         return $this;
     }
 
@@ -27,7 +27,7 @@ class MessageBrokerQueue
         return $this->description;
     }
 
-    public function setDescription(?string $description): MessageBrokerQueue
+    public function setDescription(?string $description): MessageBrokerDiscovery
     {
         $this->description = $description;
         return $this;

@@ -69,7 +69,7 @@ trait ResponseTrait
     public function getObjectFromArray(array $data, string $class, ?array $groups = null, ?string $type = null): ?object
     {
         $context = DeserializationContext::create();
-        $context->setGroups($groups ?? ['Show', 'Default', 'ReadOnly']);
+        $context->setGroups(array_merge(['Show', 'Default', 'ReadOnly'], $groups ?? []));
         $jData = json_encode(
             array_merge(
                 $data,

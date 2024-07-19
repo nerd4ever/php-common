@@ -48,6 +48,10 @@ abstract class DefaultController extends Controller
 
     abstract function getClass(): string;
 
+    protected function deserializationGroups(): array
+    {
+        return [];
+    }
 
     protected function isInstance($entity): bool
     {
@@ -85,7 +89,7 @@ abstract class DefaultController extends Controller
             if (!$adapter instanceof AdapterCreateInterface) {
                 throw new Exception('Adapter must implement AdapterCreateInterface', Response::HTTP_NOT_ACCEPTABLE);
             }
-            $entity = $this->getObject($request, $this->getClass());
+            $entity = $this->getObject($request, $this->getClass(), $this->deserializationGroups());
             if (!$this->isInstance($entity)) {
                 throw new Exception(sprintf('Expected an instance of %s', $this->getClassname()), Response::HTTP_NOT_ACCEPTABLE);
             }
@@ -137,7 +141,7 @@ abstract class DefaultController extends Controller
             if (!$adapter instanceof AdapterUpdateInterface) {
                 throw new Exception('Adapter must implement AdapterUpdateInterface', Response::HTTP_NOT_ACCEPTABLE);
             }
-            $entity = $this->getObject($request, $this->getClass());
+            $entity = $this->getObject($request, $this->getClass(), $this->deserializationGroups());
             if (!$this->isInstance($entity)) {
                 throw new Exception(sprintf('Expected an instance of %s', $this->getClassname()), Response::HTTP_NOT_ACCEPTABLE);
             }

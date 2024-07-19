@@ -50,7 +50,7 @@ abstract class DefaultController extends Controller
 
     protected function deserializationGroups(): array
     {
-        return [];
+        return ['Detail'];
     }
 
     protected function isInstance($entity): bool

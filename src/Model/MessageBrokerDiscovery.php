@@ -8,8 +8,20 @@ namespace Nerd4ever\Common\Model;
 
 class MessageBrokerDiscovery
 {
+    private string $exchange;
     private array $routingKeys = [];
     private ?string $description;
+
+    public function getExchange(): string
+    {
+        return $this->exchange;
+    }
+
+    public function setExchange(string $exchange): MessageBrokerDiscovery
+    {
+        $this->exchange = $exchange;
+        return $this;
+    }
 
     public function getRoutingKeys(): array
     {

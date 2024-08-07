@@ -189,4 +189,9 @@ class StringTools
     {
         return self::stripSpecialChar(self::stripAccents($in));
     }
+
+    public static function encoding(string $in): string
+    {
+        return mb_convert_encoding($in, 'UTF-8', 'ISO-8859-1');
+    }
 }

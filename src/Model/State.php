@@ -7,11 +7,15 @@
 namespace Nerd4ever\Common\Model;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class State extends Local
 {
     private ?int $stateId = null;
     private string $iso2;
     private Country $country;
+    private Collection $areaCodes;
 
     public function getStateId(): ?int
     {
@@ -43,6 +47,20 @@ class State extends Local
     public function setCountry(Country $country): State
     {
         $this->country = $country;
+        return $this;
+    }
+
+    public function getAreaCodes(): Collection
+    {
+        if (empty($this->areaCodes)) {
+            $this->areaCodes = new ArrayCollection();
+        }
+        return $this->areaCodes;
+    }
+
+    public function setAreaCodes(Collection $areaCodes): State
+    {
+        $this->areaCodes = $areaCodes;
         return $this;
     }
 

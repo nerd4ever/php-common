@@ -6,24 +6,12 @@
 
 namespace Nerd4ever\Common\Model;
 
-class StateAreaCode
+class StateAreaCode extends Local
 {
-    use TChronological;
 
-    protected ?string $id = null;
     private State $state;
     private int $areaCode;
 
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
-
-    public function setId(?string $id): StateAreaCode
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getState(): State
     {
@@ -47,4 +35,8 @@ class StateAreaCode
         return $this;
     }
 
+    public function getType(): string
+    {
+        return 'area-code';
+    }
 }

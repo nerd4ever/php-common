@@ -7,7 +7,7 @@
 namespace Nerd4ever\Common\Adapter;
 
 use Nerd4ever\Common\Model\DataTableResult;
-use Nerd4ever\Kaya\Model\Filter;
+use Nerd4ever\Common\Model\Filter;
 
 interface AdapterDatatableInterface
 {

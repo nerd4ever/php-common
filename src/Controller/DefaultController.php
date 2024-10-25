@@ -8,12 +8,14 @@ namespace Nerd4ever\Common\Controller;
 
 use JMS\Serializer\SerializerInterface;
 use Nerd4ever\Common\Adapter\AdapterCreateInterface;
+use Nerd4ever\Common\Adapter\AdapterDatatableInterface;
 use Nerd4ever\Common\Adapter\AdapterDeleteInterface;
 use Nerd4ever\Common\Adapter\AdapterEnableInterface;
 use Nerd4ever\Common\Adapter\AdapterListInterface;
 use Nerd4ever\Common\Adapter\AdapterNameFinderInterface;
 use Nerd4ever\Common\Adapter\AdapterReadInterface;
 use Nerd4ever\Common\Adapter\AdapterUpdateInterface;
+use Nerd4ever\Common\Model\FilterTrait;
 use Nerd4ever\Common\Model\GridAdapter;
 use Nerd4ever\Common\Model\NameFinder;
 use Nerd4ever\Common\Model\ResponseTrait;
@@ -26,6 +28,7 @@ use Exception;
 abstract class DefaultController extends Controller
 {
     use ResponseTrait;
+    use FilterTrait;
 
     public function __construct(
         private readonly SerializerInterface $serializer,
@@ -178,6 +181,23 @@ abstract class DefaultController extends Controller
                 throw new Exception('Failed to get the object name finder.', Response::HTTP_UNPROCESSABLE_ENTITY);
             }
             return new JsonResponse(['exists' => $adapter->nameFinder($entity)]);
+        } catch (Exception $ex) {
+            return $this->viewException($request, $ex);
+        }
+    }
+
+
+    public function datatableAction(Request $request): Response
+    {
+        try {
+            $adapter = $this->getAdapter();
+            if (!$adapter instanceof AdapterDatatableInterface) {
+                throw new Exception('Adapter must implement AdapterDatatableInterface', Response::HTTP_NOT_ACCEPTABLE);
+            }
+
+            $filter = $this->getFilter($request);
+            $entity = $adapter->datatable($filter);
+            return $this->viewShow($request, $entity);
         } catch (Exception $ex) {
             return $this->viewException($request, $ex);
         }

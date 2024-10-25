@@ -16,7 +16,7 @@ trait FilterTrait
     /**
      * @throws Exception
      */
-    private function validateSortDirection(?string $sortDirection): void
+    protected function validateSortDirection(?string $sortDirection): void
     {
         if (!empty($sortDirection) && !in_array($sortDirection, ['asc', 'desc'], true)) {
             throw new Exception('Invalid sort direction. Allowed values: "asc", "desc".', Response::HTTP_BAD_REQUEST);
@@ -26,7 +26,7 @@ trait FilterTrait
     /**
      * @throws Exception
      */
-    private function validatePageValues(int $pageIndex, int $pageSize): void
+    protected function validatePageValues(int $pageIndex, int $pageSize): void
     {
         if ($pageIndex < 1) {
             throw new Exception('Page index must be 1 or greater.', Response::HTTP_BAD_REQUEST);
@@ -40,7 +40,7 @@ trait FilterTrait
     /**
      * @throws Exception
      */
-    private function getFilter(Request $request): Filter
+    protected function getFilter(Request $request): Filter
     {
         $sortDirection = $request->query->get('sortDirection');
         $this->validateSortDirection($sortDirection);

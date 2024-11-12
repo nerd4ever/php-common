@@ -23,7 +23,8 @@ class Paginator
         QueryBuilder    $queryBuilder,
         Filter          $filter,
         PaginatorColumn $count,
-        array           $columns
+        array           $columns,
+        callable        $fnCount = null
     ): DataTableResult
     {
         if ($filter->getSearch()) {
@@ -40,9 +41,14 @@ class Paginator
             $queryBuilder->andWhere($orX)->setParameter('search', $search);
         }
         $countQueryBuilder = clone $queryBuilder;
-        $totalRecords = (int)$countQueryBuilder->select(sprintf('COUNT(DISTINCT %s)', $count->getField()))
-            ->getQuery()
-            ->getSingleScalarResult();
+        if ($fnCount) {
+            $totalRecords = (int)$fnCount($count, $countQueryBuilder);
+        } else {
+            $totalRecords = (int)$countQueryBuilder
+                ->select(sprintf('COUNT(DISTINCT %s)', $count->getField()))
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
 
         $pageIndex = $filter->getPageIndex() ?? 1;
         $pageSize = $filter->getPageSize() ?? 10;

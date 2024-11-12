@@ -40,7 +40,7 @@ class Paginator
             $queryBuilder->andWhere($orX)->setParameter('search', $search);
         }
         $countQueryBuilder = clone $queryBuilder;
-        $totalRecords = (int)$countQueryBuilder->select(sprintf('COUNT(%s)', $count->getField()))
+        $totalRecords = (int)$countQueryBuilder->select(sprintf('COUNT(DISTINCT %s)', $count->getField()))
             ->getQuery()
             ->getSingleScalarResult();
 

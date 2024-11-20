@@ -44,7 +44,7 @@ trait FilterTrait
     {
         $sortDirection = $request->query->get('sortDirection');
         $this->validateSortDirection($sortDirection);
-        $pageIndex = max($request->query->getInt('pageIndex', 1), 0) + 1;
+        $pageIndex = $request->query->getInt('pageIndex', 0) + 1;
         $pageSize = $request->query->getInt('pageSize', 10);
         $dateStartStr = $request->query->get('dateStart');
         $dateEndStr = $request->query->get('dateEnd');

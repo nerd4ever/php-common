@@ -35,7 +35,12 @@ class Paginator
                 if (!$c instanceof PaginatorColumn) {
                     throw new RuntimeException('Invalid column name: ' . $c, Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
-                $orX->add($queryBuilder->expr()->like($c->getField(), ':search'));
+                $orX->add(
+                    $queryBuilder->expr()->like(
+                        $queryBuilder->expr()->lower($c->getField()),
+                        $queryBuilder->expr()->literal(strtolower(':search'))
+                    )
+                );
             }
 
             $queryBuilder->andWhere($orX)->setParameter('search', $search);

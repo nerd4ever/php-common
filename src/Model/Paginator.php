@@ -28,7 +28,7 @@ class Paginator
     ): DataTableResult
     {
         if ($filter->getSearch()) {
-            $search = '%' . $filter->getSearch() . '%';
+            $search = '%' . strtolower($filter->getSearch()) . '%';
             $orX = $queryBuilder->expr()->orX();
 
             foreach ($columns as $c) {
@@ -36,10 +36,7 @@ class Paginator
                     throw new RuntimeException('Invalid column name: ' . $c, Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
                 $orX->add(
-                    $queryBuilder->expr()->like(
-                        $queryBuilder->expr()->lower($c->getField()),
-                        $queryBuilder->expr()->literal(strtolower(':search'))
-                    )
+                    $queryBuilder->expr()->like($queryBuilder->expr()->lower($c->getField()), ':search')
                 );
             }
 

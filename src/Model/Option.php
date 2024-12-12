@@ -27,6 +27,12 @@ class Option
         return $this->value;
     }
 
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;

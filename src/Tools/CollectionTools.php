@@ -20,7 +20,7 @@ class CollectionTools
         }
 
         foreach ($collectionToUpdate as $item) {
-            if (!$newCollection->contains($item)) {
+            if ($newCollection->contains($item)) {
                 continue;
             }
             $collectionToUpdate->removeElement($item);

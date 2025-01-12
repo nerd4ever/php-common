@@ -7,10 +7,11 @@
 namespace Nerd4ever\Common\Tools;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CollectionTools
 {
-    public static function syncCollections(Collection $collectionToUpdate, Collection $newCollection): void
+    public static function syncCollections(Collection $collectionToUpdate, Collection $newCollection, ?EntityManagerInterface $orphanRemoveEntity): void
     {
         foreach ($newCollection as $item) {
             if (!$collectionToUpdate->contains($item)) {
@@ -20,7 +21,11 @@ class CollectionTools
 
         foreach ($collectionToUpdate as $item) {
             if (!$newCollection->contains($item)) {
-                $collectionToUpdate->removeElement($item);
+                continue;
+            }
+            $collectionToUpdate->removeElement($item);
+            if ($orphanRemoveEntity instanceof EntityManagerInterface) {
+                $orphanRemoveEntity->remove($item);
             }
         }
     }

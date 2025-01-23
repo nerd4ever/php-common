@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CollectionTools
 {
-    public static function syncCollections(Collection $collectionToUpdate, Collection $newCollection, ?EntityManagerInterface $orphanRemoveEntity): void
+    public static function syncCollections(Collection $collectionToUpdate, Collection $newCollection, ?EntityManagerInterface $orphanRemoveEntity = null): void
     {
         foreach ($newCollection as $item) {
             if (!$collectionToUpdate->contains($item)) {

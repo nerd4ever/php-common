@@ -194,4 +194,12 @@ class StringTools
     {
         return mb_convert_encoding($in, 'UTF-8', 'ISO-8859-1');
     }
+
+    public static function truncateStr(string $data, int $length): string
+    {
+        if (mb_strlen($data) > $length) {
+            return mb_substr($data, 0, $length - 3) . '...';
+        }
+        return $data;
+    }
 }

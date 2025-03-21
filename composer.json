@@ -20,6 +20,7 @@
     "jms/serializer-bundle": ">=4.0",
     "ramsey/uuid": "^4.7",
     "doctrine/collections": "*",
+    "symfony/yaml": "*",
     "doctrine/orm": "*"
   },
   "require-dev": {

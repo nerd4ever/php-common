@@ -14,7 +14,7 @@ use Throwable;
 
 class ScopeTools
 {
-    static function load(SerializerInterface $serializer, string $dir): array
+    public static function load(SerializerInterface $serializer, string $dir): array
     {
         try {
             $files = glob($dir . '/*.yaml');
@@ -33,7 +33,7 @@ class ScopeTools
     /**
      * @throws Exception
      */
-    static public function loadFromArray(SerializerInterface $serializer, array $data): array
+    public static function loadFromArray(SerializerInterface $serializer, array $data): array
     {
         $scopes = [];
         if (!isset($data['groups']) || !is_array($data['groups'])) {

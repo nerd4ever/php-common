@@ -11,9 +11,9 @@ use Doctrine\Common\Collections\Collection;
 class Scope implements IScope
 {
     public function __construct(
-        private readonly string     $name,
         private readonly string     $label,
         private readonly ?string    $description,
+        private readonly ?string    $name,
         private readonly Collection $scopes
     )
     {
@@ -29,11 +29,10 @@ class Scope implements IScope
         return $this->description;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
-
 
     public function getScopes(): Collection
     {

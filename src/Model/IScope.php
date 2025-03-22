@@ -14,7 +14,7 @@ interface IScope
 
     public function getDescription(): ?string;
 
-    public function getName(): string;
+    public function getName(): ?string;
 
     public function getScopes(): Collection;
 }

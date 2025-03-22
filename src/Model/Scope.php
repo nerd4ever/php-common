@@ -6,6 +6,7 @@
 
 namespace Nerd4ever\Common\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 class Scope implements IScope
@@ -47,6 +48,9 @@ class Scope implements IScope
 
     public function getScopes(): Collection
     {
+        if(empty($this->scopes)) {
+            $this->scopes = new ArrayCollection();
+        }
         return $this->scopes;
     }
 }

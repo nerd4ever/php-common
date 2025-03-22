@@ -10,14 +10,25 @@ use Doctrine\Common\Collections\Collection;
 
 class Scope implements IScope
 {
-    public function __construct(
-        private readonly string     $label,
-        private readonly ?string    $description,
-        private readonly ?string    $name,
-        private readonly Collection $scopes
-    )
+    private string $label;
+    private ?string $description = null;
+    private ?string $name = null;
+    private Collection $scopes;
+
+    /**
+     * @param string $label
+     * @param string|null $description
+     * @param string|null $name
+     * @param Collection $scopes
+     */
+    public function __construct(string $label, ?string $description, ?string $name, Collection $scopes)
     {
+        $this->label = $label;
+        $this->description = $description;
+        $this->name = $name;
+        $this->scopes = $scopes;
     }
+
 
     public function getLabel(): string
     {

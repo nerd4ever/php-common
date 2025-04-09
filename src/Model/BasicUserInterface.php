@@ -22,4 +22,9 @@ interface BasicUserInterface
 
     public function getCustomerId(): ?string;
 
+    public function getTypes(): array;
+
+    public function isEmailVerified(): bool;
+
+    public function isEnabled(): bool;
 }

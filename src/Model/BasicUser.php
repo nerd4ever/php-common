@@ -15,6 +15,9 @@ class BasicUser implements BasicUserInterface
     protected ?string $providerId = null;
     protected ?string $internalId = null;
     protected ?string $customerId = null;
+    protected array $types = [];
+    protected bool $emailVerified;
+    protected bool $enabled;
 
     public function getId(): ?string
     {
@@ -93,4 +96,36 @@ class BasicUser implements BasicUserInterface
         return $this;
     }
 
+    public function getTypes(): array
+    {
+        return $this->types;
+    }
+
+    public function setTypes(array $types): BasicUser
+    {
+        $this->types = $types;
+        return $this;
+    }
+
+    public function isEmailVerified(): bool
+    {
+        return $this->emailVerified;
+    }
+
+    public function setEmailVerified(bool $emailVerified): BasicUser
+    {
+        $this->emailVerified = $emailVerified;
+        return $this;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): BasicUser
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
 }

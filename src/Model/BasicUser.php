@@ -6,7 +6,7 @@
 
 namespace Nerd4ever\Common\Model;
 
-class BasicUser
+class BasicUser implements BasicUserInterface
 {
     protected ?string $id = null;
     protected string $email;

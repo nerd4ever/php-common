@@ -16,6 +16,7 @@ class BasicUser implements BasicUserInterface
     protected ?string $internalId = null;
     protected ?string $customerId = null;
     protected array $types = [];
+    protected array $roles = [];
     protected bool $emailVerified;
     protected bool $enabled;
 
@@ -128,4 +129,16 @@ class BasicUser implements BasicUserInterface
         $this->enabled = $enabled;
         return $this;
     }
+
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): BasicUser
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
 }

@@ -24,6 +24,8 @@ interface BasicUserInterface
 
     public function getTypes(): array;
 
+    public function getRoles(): array;
+
     public function isEmailVerified(): bool;
 
     public function isEnabled(): bool;

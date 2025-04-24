@@ -37,7 +37,7 @@ abstract class AdapterDefault implements
         $columnName = $this->nameFinderColumn();
         if (!empty($columnName)) {
             $tmp = $this->findByName($this->nameFinderValue($object));
-            if (is_a($tmp, $this->getClass()) && $e->getId() !== $tmp->getId()) {
+            if (is_a($tmp, $this->getClass()) && $object->getId() !== $tmp->getId()) {
                 throw new InvalidArgumentException($this->shortClassName() . ' already exists', Response::HTTP_CONFLICT);
             }
         }

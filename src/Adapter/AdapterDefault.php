@@ -34,6 +34,13 @@ abstract class AdapterDefault implements
         if (!is_a($object, $this->getClass())) {
             throw new InvalidArgumentException('The object must be an instance of ' . $this->shortClassName());
         }
+        $columnName = $this->nameFinderColumn();
+        if (!empty($columnName)) {
+            $tmp = $this->findByName($this->nameFinderValue($object));
+            if (is_a($tmp, $this->getClass()) && $e->getId() !== $tmp->getId()) {
+                throw new InvalidArgumentException($this->shortClassName() . ' already exists', Response::HTTP_CONFLICT);
+            }
+        }
         $r = $this->copy($object);
         $this->getManager()->persist($r);
         $this->getManager()->flush();

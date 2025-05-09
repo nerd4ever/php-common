@@ -10,7 +10,7 @@ use JMS\Serializer\SerializerInterface;
 
 interface EntityConverterInterface
 {
-    public function toArray(object $object): array;
+    public function toArray(object $object): ?array;
 
-    public function toObject(SerializerInterface $serializer, array $data): object;
+    public function toObject(SerializerInterface $serializer, array $data): ?object;
 }

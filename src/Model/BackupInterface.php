@@ -8,6 +8,8 @@ namespace Nerd4ever\Common\Model;
 
 interface BackupInterface
 {
+    public function entityIdentifier(): string;
+
     public function exportData(): array;
 
     public function importData(array $data): void;

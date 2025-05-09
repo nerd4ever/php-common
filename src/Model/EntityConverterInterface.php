@@ -14,5 +14,5 @@ interface EntityConverterInterface
 
     public function toArray(): array;
 
-    public function toObject(SerializerInterface $serializer, array $data): void;
+    public function toObject(SerializerInterface $serializer, array $data): object;
 }

@@ -68,14 +68,8 @@ class Paginator
                         break;
 
                     case PaginatorColumnTypeEnum::DATE:
-                        try {
-                            $date = new DateTime($searchValue);
-                            $orX->add($queryBuilder->expr()->eq($field, ':' . $paramName));
-                            $queryBuilder->setParameter($paramName, $date);
-                        } catch (Exception) {
-                            $orX->add("CAST($field AS TEXT) LIKE :$paramName");
-                            $queryBuilder->setParameter($paramName, $searchLike);
-                        }
+                        $orX->add("CAST($field AS VARCHAR) LIKE :$paramName");
+                        $queryBuilder->setParameter($paramName, $searchLike);
                         break;
                 }
             }

@@ -10,9 +10,10 @@ class PaginatorColumn
 {
 
     public function __construct(
-        private readonly string  $alias,
-        private readonly string  $tablePrefix,
-        private readonly ?string $column = null,
+        private readonly string                   $alias,
+        private readonly string                   $tablePrefix,
+        private readonly ?string                  $column = null,
+        private readonly ?PaginatorColumnTypeEnum $type = PaginatorColumnTypeEnum::STRING // Default type is string, can be overridden
     )
     {
     }
@@ -36,5 +37,11 @@ class PaginatorColumn
     {
         return $this->tablePrefix . '.' . $this->getColumn();
     }
+
+    public function getType(): ?PaginatorColumnTypeEnum
+    {
+        return $this->type;
+    }
+
 
 }

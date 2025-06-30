@@ -6,7 +6,9 @@
 
 namespace Nerd4ever\Common\Model;
 
+use DateTime;
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,19 +30,57 @@ class Paginator
     ): DataTableResult
     {
         if ($filter->getSearch()) {
-            $search = '%' . strtolower($filter->getSearch()) . '%';
+            $searchValue = $filter->getSearch();
+            $searchLike = '%' . strtolower($searchValue) . '%';
             $orX = $queryBuilder->expr()->orX();
+            $paramCounter = 0;
 
-            foreach ($columns as $c) {
-                if (!$c instanceof PaginatorColumn) {
-                    throw new RuntimeException('Invalid column name: ' . $c, Response::HTTP_UNPROCESSABLE_ENTITY);
+            foreach ($columns as $column) {
+                if (!$column instanceof PaginatorColumn) {
+                    throw new RuntimeException('Invalid column definition', Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
-                $orX->add(
-                    $queryBuilder->expr()->like($queryBuilder->expr()->lower($c->getField()), ':search')
-                );
+
+                $field = $column->getField();
+                $paramName = 'search_' . $paramCounter++;
+
+                switch ($column->getType()) {
+                    case PaginatorColumnTypeEnum::STRING:
+                        $orX->add($queryBuilder->expr()->like(
+                            $queryBuilder->expr()->lower($field),
+                            ':' . $paramName
+                        ));
+                        $queryBuilder->setParameter($paramName, $searchLike);
+                        break;
+
+                    case PaginatorColumnTypeEnum::NUMBER:
+                        if (is_numeric($searchValue)) {
+                            $orX->add($queryBuilder->expr()->eq($field, ':' . $paramName));
+                            $queryBuilder->setParameter($paramName, $searchValue);
+                        }
+                        break;
+
+                    case PaginatorColumnTypeEnum::BOOLEAN:
+                        if (strtolower($searchValue) === 'true' || strtolower($searchValue) === 'false') {
+                            $boolValue = strtolower($searchValue) === 'true';
+                            $orX->add($queryBuilder->expr()->eq($field, ':' . $paramName));
+                            $queryBuilder->setParameter($paramName, $boolValue);
+                        }
+                        break;
+
+                    case PaginatorColumnTypeEnum::DATE:
+                        try {
+                            $date = new DateTime($searchValue);
+                            $orX->add($queryBuilder->expr()->eq($field, ':' . $paramName));
+                            $queryBuilder->setParameter($paramName, $date);
+                        } catch (Exception) {
+                        }
+                        break;
+                }
             }
 
-            $queryBuilder->andWhere($orX)->setParameter('search', $search);
+            if (count($orX->getParts()) > 0) {
+                $queryBuilder->andWhere($orX);
+            }
         }
         $countQueryBuilder = clone $queryBuilder;
         if ($fnCount) {
@@ -77,7 +117,6 @@ class Paginator
             ->setCurrentPage($filter?->getPageIndex() ?? 1)
             ->setPageSize($filter?->getPageSize() ?? 10)
             ->setTotalPages(ceil($totalRecords / ($filter?->getPageSize() ?? 10)));
-
         return $result;
     }
 }

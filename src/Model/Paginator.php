@@ -73,6 +73,8 @@ class Paginator
                             $orX->add($queryBuilder->expr()->eq($field, ':' . $paramName));
                             $queryBuilder->setParameter($paramName, $date);
                         } catch (Exception) {
+                            $orX->add("CAST($field AS TEXT) LIKE :$paramName");
+                            $queryBuilder->setParameter($paramName, $searchLike);
                         }
                         break;
                 }

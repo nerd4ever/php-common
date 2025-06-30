@@ -68,7 +68,7 @@ class Paginator
                         break;
 
                     case PaginatorColumnTypeEnum::DATE:
-                        $orX->add("CAST($field AS VARCHAR) LIKE :$paramName");
+                        $orX->add("CAST_EXPR({$field}) LIKE :$paramName");
                         $queryBuilder->setParameter($paramName, $searchLike);
                         break;
                 }

@@ -202,4 +202,14 @@ class StringTools
         }
         return $data;
     }
+
+    public static function safeToUpper(string $in): string
+    {
+        return mb_strtoupper($in, 'UTF-8');
+    }
+
+    public static function safeToLower(string $in): string
+    {
+        return mb_strtolower($in, 'UTF-8');
+    }
 }
